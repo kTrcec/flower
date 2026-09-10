@@ -1,0 +1,55 @@
+const url = `https://docs.google.com/spreadsheets/d/e/2PACX-1vRWKhHCPBrbsBbGrtGa-oElgN2lAx7gaXC_o75Ek2Az9nOxjqYftqLazP-NVWg3XwN0iRxlc5LBSybv/pub?output=tsv`;
+
+async function loadFlowers() {
+    try {
+        const response = await fetch(url);
+        const data = await response.text();
+        
+        console.log(data);
+
+        const catalog = document.getElementById('catalog'); 
+        catalog.innerHTML = ''; // Очищаем экран перед загрузкой
+
+        // Разрезаем текст на отдельные строчки
+        const rows = data.split('\n');
+
+        rows.forEach(row => {
+            // Очищаем строчку от кавычек Гугла
+            const cleanRow = row.replace(/"/g, '').trim();
+            if (!cleanRow) return; // Пропускаем пустые строки
+
+            const columns = cleanRow.split('\t');
+            
+            if (columns.length >= 2) {
+                const title = columns[0].trim();  // Колонка А: Название
+                const price = columns[1].trim();  // Колонка B: Цена
+                const count = columns[2].trim();  // Колонка C: Количество
+                const image_flowers = columns[3];
+
+                console.log(title)
+                console.log(price)
+                console.log(count)
+
+                const cardHTML = `
+                    <div class="flower-card">
+                        <div class="image-wrapper">
+                            <img src=${image_flowers} alt="${title}">
+                        </div>
+                        <div class="flower-info">
+                            <h3 class="flower-title">${title}</h3>
+                            <p class="flower-count">🌸 В наличии: ${count} шт.</p>
+                            <p class="flower-price">${price} ₽</p>
+                        </div>
+                    </div>
+                `;
+                catalog.innerHTML += cardHTML;
+            }
+        });
+
+    } catch (error) {
+        console.error('Ошибка сборки карточек:', error);
+    }
+}
+
+// Запускаем работу сайта!
+loadFlowers();
