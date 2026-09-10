@@ -1,0 +1,75 @@
+body {
+    background-color: #f9f9f9;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 40px; /* Отступы от краев экрана */
+}
+
+/* Настройки сетки: карточки будут сами переноситься и подстраиваться по размеру */
+.flower-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px; /* Расстояние между карточками */
+    max-width: 1200px;
+    margin: 0 auto; /* Центрируем всю сетку на экране */
+}
+
+/* Сама карточка товара */
+.flower-card {
+    background-color: #ffffff;
+    border-radius: 12px; /* Скругление углов карточки */
+    overflow: hidden; /* Чтобы картинка не вылезала за скругленные углы */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Легкая тень */
+    transition: 0.3s ease; /* Плавность эффектов */
+}
+
+/* Эффект при наведении на карточку */
+.flower-card:hover {
+    transform: translateY(-5px); /* Карточка слегка приподнимается */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Тень становится глубже */
+    cursor: pointer;
+}
+
+/* Контейнер для картинки, чтобы они все были одинаковой высоты */
+.image-wrapper {
+    width: 100%;
+    height: 250px; 
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Картинка заполнит блок без искажений пропорций */
+}
+
+/* Блок с текстом под картинкой */
+.flower-info {
+    padding: 15px;
+}
+
+.flower-title {
+    font-size: 16px;
+    color: #333333;
+    margin: 0 0 8px 0;
+    font-weight: 500;
+    /* Ограничиваем текст двумя строчками, если название длинное */
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.flower-count {
+    font-size: 13px;
+    color: #2e7d32; /* Красивый зелёный цвет, сигнализирует что товар в наличии */
+    margin: 0 0 12px 0;
+    font-weight: 500;
+}
+
+.flower-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+}
