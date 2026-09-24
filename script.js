@@ -32,7 +32,7 @@ async function loadFlowers() {
                    in_stock = "есть";
                 }
                 else{
-                    in_stock = "нету";
+                    in_stock = "нет";
                 }
 
                 const cardHTML = `
