@@ -38,7 +38,7 @@ async function loadFlowers() {
                 const cardHTML = `
                     <div class="flower-card">
                         <div class="image-wrapper img">
-                            <img src=${image_flowers} alt="${title}">
+                            <img src=flower/${image_flowers} alt="${title}">
                         </div>
                         <div class="flower-info">
                             <h3 class="flower-title">${title}</h3>
