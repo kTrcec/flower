@@ -35,10 +35,6 @@ async function loadFlowers() {
                     in_stock = "нету";
                 }
 
-                console.log(title)
-                console.log(price)
-                console.log(count)
-
                 const cardHTML = `
                     <div class="flower-card">
                         <div class="image-wrapper img">
