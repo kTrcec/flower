@@ -24,16 +24,6 @@ async function loadFlowers() {
                 const price = columns[1].trim();  // Колонка B: Цена
                 const count = columns[2].trim();  // Колонка C: Количество
                 const image_flowers = columns[3];
-                
-                let in_stock;
-                
-
-                if (count != 0) {
-                   in_stock = "есть";
-                }
-                else{
-                    in_stock = "нет";
-                }
 
                 const cardHTML = `
                     <div class="flower-card">
