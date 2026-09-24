@@ -32,7 +32,7 @@ async function loadFlowers() {
                         </div>
                         <div class="flower-info">
                             <h3 class="flower-title">${title}</h3>
-                            <p class="flower-count">🌸 В наличии: ${in_stock}.</p>
+                            <p class="flower-count">🌸 В наличии: ${count}.</p>
                             <p class="flower-price">${price} ₽</p>
                         </div>
                     </div>
