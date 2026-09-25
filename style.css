@@ -135,3 +135,25 @@ body {
     transform: scale(2.5); 
     opacity: 1;
 }
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 10px 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+    user-select: none;
+}
+
+.slider-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
