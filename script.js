@@ -37,7 +37,7 @@ async function loadFlowers() {
                 const cardHTML = `
                     <div class="flower-card">
                         <div class="image-wrapper" style="position: relative;">
-                            ${showArrows ? `<button class="slider-btn prev-btn" onclick="changeImage(this, -1)">&#10094;</button>` : ''}
+                            ${showArrows ? `<button class="slider-btn prev-btn" onclick="changeImage(this, -1, event)">&#10094;</button>` : ''}
                             
                             <img src="flower/${firstImage}" 
                                  data-images="${images.join(',')}" 
@@ -46,7 +46,7 @@ async function loadFlowers() {
                                  onclick="openImage(this.src)" 
                                  style="cursor: zoom-in;">
                                  
-                            ${showArrows ? `<button class="slider-btn next-btn" onclick="changeImage(this, 1)">&#10095;</button>` : ''}
+                            ${showArrows ? `<button class="slider-btn next-btn" onclick="changeImage(this, 1, event)">&#10095;</button>` : ''}
                         </div>
                         <div class="flower-info">
                             <h3 class="flower-title">${title}</h3>
@@ -65,7 +65,10 @@ async function loadFlowers() {
 }
 
 // Универсальная функция переключения картинок с вашей защитой путей
-window.changeImage = function(button, direction) {
+window.changeImage = function(button, direction, event) {
+    // Останавливаем всплытие клика, чтобы не срабатывал клик по карточке/картинке
+    if (event) event.stopPropagation(); 
+    
     const wrapper = button.parentElement;
     const img = wrapper.querySelector('img');
     
@@ -76,7 +79,6 @@ window.changeImage = function(button, direction) {
                       
     let currentIndex = parseInt(img.getAttribute('data-index') || 0, 10);
     
-    // Переключаем индекс по кругу
     currentIndex += direction;
     if (currentIndex >= images.length) currentIndex = 0;
     if (currentIndex < 0) currentIndex = images.length - 1;
@@ -84,13 +86,13 @@ window.changeImage = function(button, direction) {
     const nextImage = images[currentIndex];
     img.setAttribute('data-index', currentIndex);
     
-    // Используем вашу логику безопасного обновления имени файла в пути
     const currentSrc = img.src;
     const lastSlashIndex = currentSrc.lastIndexOf('/');
     const basePath = currentSrc.substring(0, lastSlashIndex + 1);
     
     img.src = basePath + nextImage;
 };
+
 
 loadFlowers();
 
