@@ -35,7 +35,7 @@ body {
     overflow: hidden;
     position: relative;
     /* 1. ДОБАВЛЯЕМ СЮДА (центрируем картинку внутри этого блока) */
-    display: inline-block;
+    display: block;
     justify-content: center; 
     align-items: center; /* Центрирует и по высоте, чтобы фото не съезжало вверх */
     
@@ -51,7 +51,8 @@ body {
     height: 100%;
     
     /* 4. Оставляем это свойство здесь, чтобы букет не сплющивался гармошкой */
-    object-fit: cover; 
+    object-fit: cover;
+    display: block;
 }
 
 /* Блок с текстом под картинкой */
@@ -140,20 +141,27 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5); /* Немного темнее для контраста */
     color: white;
     border: none;
-    font-size: 20px;
-    padding: 10px 12px;
+    font-size: 24px;              /* Чуть крупнее стрелочки */
+    padding: 8px 12px;
     cursor: pointer;
     border-radius: 50%;
-    z-index: 10;
+    z-index: 10;                  /* Повышаем приоритет отображения */
     user-select: none;
+    transition: background 0.2s ease, opacity 0.2s ease;
 }
 
 .slider-btn:hover {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
 }
 
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
+/* Точное позиционирование по краям */
+.prev-btn {
+    left: 8px;
+}
+
+.next-btn {
+    right: 8px;
+}
