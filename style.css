@@ -33,9 +33,9 @@ body {
 /* Контейнер для картинки, чтобы они все были одинаковой высоты */
 .image-wrapper {
     overflow: hidden;
-    
+    position: relative;
     /* 1. ДОБАВЛЯЕМ СЮДА (центрируем картинку внутри этого блока) */
-    display: flex;
+    display: inline-block;
     justify-content: center; 
     align-items: center; /* Центрирует и по высоте, чтобы фото не съезжало вверх */
     
