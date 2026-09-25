@@ -28,7 +28,7 @@ async function loadFlowers() {
                 const cardHTML = `
                     <div class="flower-card">
                         <div class="image-wrapper img">
-                            <img src=flower/${image_flowers} alt="${title}">
+                            <img src=flower/${image_flowers} alt="${title}" onclick="openImage(this.src)" style="cursor: zoom-in;">
                         </div>
                         <div class="flower-info">
                             <h3 class="flower-title">${title}</h3>
@@ -47,3 +47,27 @@ async function loadFlowers() {
 }
 
 loadFlowers();
+
+// Динамически создаем и добавляем модальное окно в body
+const overlayHTML = `
+    <div id="imageOverlay" class="image-overlay">
+        <img id="fullImage" class="full-image" src="" alt="Полный экран">
+    </div>
+`;
+document.body.insertAdjacentHTML('beforeend', overlayHTML);
+
+const overlay = document.getElementById('imageOverlay');
+const fullImage = document.getElementById('fullImage');
+
+// Функция открытия картинки
+window.openImage = function(src) {
+    fullImage.src = src;
+    overlay.classList.add('active'); // Просто добавляем класс
+    document.body.style.overflow = 'hidden'; // Отключаем прокрутку сайта
+}
+
+// Функция закрытия
+overlay.addEventListener('click', () => {
+    overlay.classList.remove('active'); // Просто убираем класс
+    document.body.style.overflow = ''; // Возвращаем прокрутку сайта
+});
