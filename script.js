@@ -23,7 +23,7 @@ async function loadFlowers() {
                 const title = columns[0].trim();  // Колонка А: Название
                 const price = columns[1].trim();  // Колонка B: Цена
                 const count = columns[2].trim();  // Колонка C: Количество
-                const imagesStr = columns[3] ? columns[3].trim() : '';
+                const imagesStr = columns.slice(3).join(' ').trim();
 
                 console.log(imagesStr);
                 
