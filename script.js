@@ -23,16 +23,34 @@ async function loadFlowers() {
                 const title = columns[0].trim();  // Колонка А: Название
                 const price = columns[1].trim();  // Колонка B: Цена
                 const count = columns[2].trim();  // Колонка C: Количество
-                const image_flowers = columns[3];
+                const imagesStr = columns[3] ? columns[3].trim() : '';
+                
+                // Разбиваем строку по пробелам на массив отдельных картинок и чистим от скрытых символов
+                const images = imagesStr ? imagesStr.split(/\s+/).map(img => img.trim()).filter(img => img !== '') : [];
+                
+                // Берем первую картинку для главного отображения, либо заглушку
+                const firstImage = images.length > 0 ? images[0] : 'default.jpg'; 
+                
+                // Стрелочки показываем только если картинок в ячейке больше одной
+                const showArrows = images.length > 1;
 
                 const cardHTML = `
                     <div class="flower-card">
-                        <div class="image-wrapper img">
-                            <img src=flower/${image_flowers} alt="${title}" onclick="openImage(this.src)" style="cursor: zoom-in;">
+                        <div class="image-wrapper" style="position: relative;">
+                            ${showArrows ? `<button class="slider-btn prev-btn" onclick="changeImage(this, -1)">&#10094;</button>` : ''}
+                            
+                            <img src="flower/${firstImage}" 
+                                 data-images="${images.join(',')}" 
+                                 data-index="0" 
+                                 alt="${title}" 
+                                 onclick="openImage(this.src)" 
+                                 style="cursor: zoom-in;">
+                                 
+                            ${showArrows ? `<button class="slider-btn next-btn" onclick="changeImage(this, 1)">&#10095;</button>` : ''}
                         </div>
                         <div class="flower-info">
                             <h3 class="flower-title">${title}</h3>
-                            <p class="flower-count">🌸 В наличии: ${count}.</p>
+                            <p class="flower-count">🌸 В наличии: ${count}</p>
                             <p class="flower-price">${price} ₽</p>
                         </div>
                     </div>
@@ -45,6 +63,34 @@ async function loadFlowers() {
         console.error('Ошибка сборки карточек:', error);
     }
 }
+
+// Универсальная функция переключения картинок с вашей защитой путей
+window.changeImage = function(button, direction) {
+    const wrapper = button.parentElement;
+    const img = wrapper.querySelector('img');
+    
+    const images = img.getAttribute('data-images')
+                      .split(',')
+                      .map(name => name.trim())
+                      .filter(name => name.length > 0);
+                      
+    let currentIndex = parseInt(img.getAttribute('data-index') || 0, 10);
+    
+    // Переключаем индекс по кругу
+    currentIndex += direction;
+    if (currentIndex >= images.length) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = images.length - 1;
+    
+    const nextImage = images[currentIndex];
+    img.setAttribute('data-index', currentIndex);
+    
+    // Используем вашу логику безопасного обновления имени файла в пути
+    const currentSrc = img.src;
+    const lastSlashIndex = currentSrc.lastIndexOf('/');
+    const basePath = currentSrc.substring(0, lastSlashIndex + 1);
+    
+    img.src = basePath + nextImage;
+};
 
 loadFlowers();
 
