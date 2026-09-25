@@ -84,3 +84,54 @@ body {
     color: #000000;
     margin: 0;
 }
+
+.image-overlay {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 15, 15, 0.95); /* Глубокий темный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    
+    /* Скрываем элемент по умолчанию без использования display: none */
+    opacity: 0;
+    pointer-events: none; /* Клик проходит насквозь, пока окно скрыто */
+    transition: opacity 0.3s ease;
+}
+
+/* Класс активации (плавное появление фона) */
+.image-overlay.active {
+    opacity: 1;
+    pointer-events: auto; /* Делаем окно кликабельным при открытии */
+}
+
+/* Сама увеличенная картинка */
+.full-image {
+    /* 1. Возвращаем естественные размеры картинки, чтобы она не создавала пустых блоков */
+    width: auto;
+    height: auto;
+    
+    /* Ограничиваем, чтобы на огромных мониторах она не вылезала за экран */
+    max-width: 90vw;   
+    max-height: 90vh;  
+    
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); /* Тень ляжет четко по контуру фото */
+    
+    /* 2. НАСТОЯЩЕЕ УВЕЛИЧЕНИЕ: Сжимаем картинку, когда окно закрыто */
+    transform: scale(0.3); 
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+}
+
+/* 3. Анимация при открытии: увеличиваем картинку в 2.5 раза от её размера */
+/* Если картинка изначально маленькая, scale(2.5) сделает её большой и заметной */
+.image-overlay.active .full-image {
+    transform: scale(2.5); 
+    opacity: 1;
+}
