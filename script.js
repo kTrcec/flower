@@ -25,7 +25,7 @@ async function loadFlowers() {
                 const count = columns[2].trim();  // Колонка C: Количество
                 const imagesStr = columns[3] ? columns[3].trim() : '';
 
-                console.log(imageStr);
+                console.log(imagesStr);
                 
                 // Разбиваем строку по пробелам на массив отдельных картинок и чистим от скрытых символов
                 const images = imagesStr ? imagesStr.split(/\s+/).map(img => img.trim()).filter(img => img !== '') : [];
@@ -36,7 +36,7 @@ async function loadFlowers() {
                 // Стрелочки показываем только если картинок в ячейке больше одной
                 const showArrows = images.length > 1;
 
-                console.log(image);
+                console.log(images);
 
                 const cardHTML = `
                     <div class="flower-card">
