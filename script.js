@@ -8,9 +8,8 @@ async function loadFlowers() {
         console.log(data);
 
         const catalog = document.getElementById('catalog'); 
-        catalog.innerHTML = ''; // Очищаем экран перед загрузкой
+        catalog.innerHTML = '';
 
-        // Разрезаем текст на отдельные строчки
         const rows = data.split('\n');
 
         rows.forEach(row => {
@@ -20,20 +19,17 @@ async function loadFlowers() {
             const columns = cleanRow.split('\t');
             
             if (columns.length >= 2) {
-                const title = columns[0].trim();  // Колонка А: Название
-                const price = columns[1].trim();  // Колонка B: Цена
-                const count = columns[2].trim();  // Колонка C: Количество
+                const title = columns[0].trim();  // Название
+                const price = columns[1].trim();  //Цена
+                const count = columns[2].trim();  //Количество
                 const imagesStr = columns.slice(3).join(' ').trim();
 
                 console.log(imagesStr);
                 
-                // Разбиваем строку по пробелам на массив отдельных картинок и чистим от скрытых символов
                 const images = imagesStr ? imagesStr.split(/\s+/).map(img => img.trim()).filter(img => img !== '') : [];
                 
-                // Берем первую картинку для главного отображения, либо заглушку
                 const firstImage = images.length > 0 ? images[0] : 'default.jpg'; 
                 
-                // Стрелочки показываем только если картинок в ячейке больше одной
                 const showArrows = images.length > 1;
 
                 console.log(images);
@@ -68,9 +64,7 @@ async function loadFlowers() {
     }
 }
 
-// Универсальная функция переключения картинок с вашей защитой путей
 window.changeImage = function(button, direction, event) {
-    // Останавливаем всплытие клика, чтобы не срабатывал клик по карточке/картинке
     if (event) event.stopPropagation(); 
     
     const wrapper = button.parentElement;
@@ -100,7 +94,6 @@ window.changeImage = function(button, direction, event) {
 
 loadFlowers();
 
-// Динамически создаем и добавляем модальное окно в body
 const overlayHTML = `
     <div id="imageOverlay" class="image-overlay">
         <img id="fullImage" class="full-image" src="" alt="Полный экран">
@@ -111,15 +104,13 @@ document.body.insertAdjacentHTML('beforeend', overlayHTML);
 const overlay = document.getElementById('imageOverlay');
 const fullImage = document.getElementById('fullImage');
 
-// Функция открытия картинки
 window.openImage = function(src) {
     fullImage.src = src;
-    overlay.classList.add('active'); // Просто добавляем класс
-    document.body.style.overflow = 'hidden'; // Отключаем прокрутку сайта
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
-// Функция закрытия
 overlay.addEventListener('click', () => {
-    overlay.classList.remove('active'); // Просто убираем класс
-    document.body.style.overflow = ''; // Возвращаем прокрутку сайта
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
 });
