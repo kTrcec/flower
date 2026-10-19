@@ -79,6 +79,9 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-top: 15px;
+
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .order-date-alert {
@@ -95,6 +98,8 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     white-space: nowrap;
+
+    margin-left: auto;
 }
 
 .contacts-title {
