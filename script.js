@@ -23,16 +23,12 @@ async function loadFlowers() {
                 const price = columns[1].trim();  //Цена
                 const count = columns[2].trim();  //Количество
                 const imagesStr = columns.slice(3).join(' ').trim();
-
-                console.log(imagesStr);
                 
                 const images = imagesStr ? imagesStr.split(/\s+/).map(img => img.trim()).filter(img => img !== '') : [];
                 
                 const firstImage = images.length > 0 ? images[0] : 'default.jpg'; 
                 
                 const showArrows = images.length > 1;
-
-                console.log(images);
 
                 const cardHTML = `
                     <div class="flower-card">
