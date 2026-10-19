@@ -1,0 +1,110 @@
+body {
+    background-color: #f9f9f9;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 40px;
+}
+
+/* Кнопка возврата назад в углу */
+.back-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #666666;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+.back-btn:hover {
+    color: #000000;
+}
+
+/* Центральный контейнер формы */
+.order-container {
+    background-color: #ffffff;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.order-title {
+    margin-top: 0;
+    font-size: 22px;
+    color: #222222;
+}
+
+.order-instruction {
+    font-size: 15px;
+    color: #666666;
+    line-height: 1.5;
+}
+
+/* Красивый блок с текстом пунктов */
+.order-form-text {
+    background-color: #f5f5f5;
+    padding: 20px 20px 20px 40px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.order-form-text ol {
+    margin: 0;
+    padding: 0 0 0 5px;
+}
+
+.order-form-text li {
+    font-size: 15px;
+    color: #333333;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.order-form-text li span {
+    color: #777777;
+    font-size: 14px;
+}
+
+/* Предупреждение о дате */
+.order-date-alert {
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #c62828;
+}
+
+.contacts-title {
+    font-size: 16px;
+    margin: 30px 0 15px 0;
+    color: #222222;
+}
+
+/* Ссылки на мессенджеры */
+.messengers-block {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.msgr-link {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: opacity 0.2s ease;
+}
+
+.msgr-link:hover {
+    opacity: 0.9;
+}
+
+/* Фирменные цвета для кнопок */
+.tg { background-color: #0088cc; }
+.wa { background-color: #25d366; }
+.vb { background-color: #7360f2; }
