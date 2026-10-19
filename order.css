@@ -108,3 +108,37 @@ body {
 .tg { background-color: #0088cc; }
 .wa { background-color: #25d366; }
 .vb { background-color: #7360f2; }
+
+.copy-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5f5; /* Светло-серый фон плашки */
+    border: 1px dashed #cccccc; /* Аккуратная пунктирная рамка */
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 25px;
+    cursor: pointer;           /* Меняет курсор на "пальчик", показывая что можно нажать */
+}
+
+/* Сам номер телефона на плашке */
+.copy-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222222;
+    user-select: all;          /* МАГИЯ: при одном клике весь номер выделится сам! */
+    -webkit-user-select: all;  /* Поддержка для браузеров Safari и Айфонов */
+}
+
+/* Мелкая подсказка снизу телефона */
+.copy-hint {
+    font-size: 12px;
+    color: #777777;
+    margin-top: 5px;
+}
+
+/* Эффект при наведении */
+.copy-banner:hover {
+    background-color: #eaeaea; /* Плашка становится чуть темнее */
+    border-color: #999999;     /* Рамка становится четче */
+}
