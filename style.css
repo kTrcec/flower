@@ -146,3 +146,27 @@ body {
 .next-btn {
     right: 8px;
 }
+
+
+.order-page-btn {
+    position: absolute;       /* Вырываем кнопку из общего потока и привязываем к экрану */
+    top: 0;                   /* Прижимаем вплотную к верхнему краю страницы */
+    left: 0;                  /* Прижимаем вплотную к левому краю страницы */
+    
+    padding: 14px 28px;       /* Увеличили внутренние отступы, чтобы кнопка стала чуть больше */
+    background-color: #eaeaea; 
+    color: #333333;            
+    text-decoration: none;
+    font-size: 16px;          /* Сделали сам текст крупнее (было 14px) */
+    font-weight: 500;
+    
+    /* Скругляем только один угол — нижний правый, чтобы кнопка смотрелась как встроенная вкладка */
+    border-radius: 0 0 12px 0; 
+    
+    transition: background-color 0.2s ease;
+}
+
+/* Эффект при наведении курсора на ПК */
+.order-page-btn:hover {
+    background-color: #dcdcdc; 
+}
