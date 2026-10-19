@@ -17,15 +17,17 @@
             Для заказа необходимо заполнить форму и отправить её в один из мессенджеров ниже:
         </p>
 
-        <!-- Текстовая памятка формы -->
-        <div class="order-form-text">
+        <div class="order-form-text" style="cursor: pointer;" onclick="navigator.clipboard.writeText('1. Фамилия Имя:\n2. Дата, когда нужны цветы:\n3. Телефон:\n4. Количество букетов, цветов и номера сортов:'); alert('Шаблон заказа скопирован!');">   
             <ol>
                 <li>Фамилия Имя</li>
                 <li>Дата, когда вам нужны цветы</li>
                 <li>Телефон</li>
                 <li>Количество букетов и цветов в букете, а также номера сортов <span>(или можно положиться на наш вкус)</span></li>
             </ol>
-            <div class="order-date-alert">⚠️ Цены актуальны до 1 марта</div>
+            <div class="order-footer">
+                <div class="order-date-alert">⚠️ Цены актуальны до 1 марта</div>
+                <div class="copy-badge">📋 Нажмите для копирования</div>
+            </div>
         </div>
 
         <h3 class="contacts-title">Напишите нам для заказа:</h3>
@@ -34,10 +36,10 @@
         <div class="messengers-block">
             <a href="https://t.me/KTRcec1" target="_blank" class="msgr-link tg">Telegram</a>
             <a href="https://wa.me" target="_blank" class="msgr-link wa">WhatsApp</a>
-            <a href="https://max.ru/u/f9LHodD0cOLNpYGJw-GjQCyFgg8r6k1hUC4VjZudWrCP6PZtTayPOUqkMbg" target="_blank" class="msgr-link vb">Max</a>
+            <a href="https://max.ru/u/f9LHodD0cOLNpYGJw-GjQCyFgg8r6k1hUC4VjZudWrCP6PZtTayPOUqkMbg" target="_blank" class="msgr-link mx">Max</a>
         </div>
 
-        <div class="copy-banner" onclick="navigator.clipboard.writeText('+79991234567'); alert('Номер скопирован!');">
+        <div class="copy-banner">
             <span class="copy-text">+79991234567</span>
             <span class="copy-hint">📋 Нажмите, чтобы скопировать номер</span>
         </div>
