@@ -5,7 +5,6 @@ body {
     padding: 40px;
 }
 
-/* Кнопка возврата назад в углу */
 .back-btn {
     display: inline-block;
     margin-bottom: 20px;
@@ -15,11 +14,11 @@ body {
     font-weight: 500;
     transition: color 0.2s ease;
 }
+
 .back-btn:hover {
     color: #000000;
 }
 
-/* Центральный контейнер формы */
 .order-container {
     background-color: #ffffff;
     max-width: 600px;
@@ -41,12 +40,21 @@ body {
     line-height: 1.5;
 }
 
-/* Красивый блок с текстом пунктов */
 .order-form-text {
     background-color: #f5f5f5;
-    padding: 20px 20px 20px 40px;
+    padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
+    border: 1px dashed #cccccc;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-form-text:hover {
+    background-color: #eaeaea;
+    border-color: #999999;
+    transform: translateY(-2px);
 }
 
 .order-form-text ol {
@@ -66,12 +74,27 @@ body {
     font-size: 14px;
 }
 
-/* Предупреждение о дате */
-.order-date-alert {
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 15px;
+}
+
+.order-date-alert {
     font-size: 13px;
     font-weight: bold;
     color: #c62828;
+}
+
+.copy-badge {
+    font-size: 12px;
+    color: #777777;
+    background-color: transparent;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .contacts-title {
@@ -80,7 +103,6 @@ body {
     color: #222222;
 }
 
-/* Ссылки на мессенджеры */
 .messengers-block {
     display: flex;
     gap: 10px;
@@ -104,41 +126,37 @@ body {
     opacity: 0.9;
 }
 
-/* Фирменные цвета для кнопок */
 .tg { background-color: #0088cc; }
 .wa { background-color: #25d366; }
-.vb { background-color: #7360f2; }
+.mx { background-color: #1a2b4c; } /* Исправили цвет мессенджера Max */
 
 .copy-banner {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f5f5f5; /* Светло-серый фон плашки */
-    border: 1px dashed #cccccc; /* Аккуратная пунктирная рамка */
+    background-color: #f5f5f5;
+    border: 1px dashed #cccccc;
     padding: 15px;
     border-radius: 8px;
     margin-top: 25px;
-    cursor: pointer;           /* Меняет курсор на "пальчик", показывая что можно нажать */
+    cursor: pointer;
 }
 
-/* Сам номер телефона на плашке */
+.copy-banner:hover {
+    background-color: #eaeaea;
+    border-color: #999999;
+}
+
 .copy-text {
     font-size: 18px;
     font-weight: bold;
     color: #222222;
-    user-select: all;          /* МАГИЯ: при одном клике весь номер выделится сам! */
-    -webkit-user-select: all;  /* Поддержка для браузеров Safari и Айфонов */
+    user-select: all;
+    -webkit-user-select: all;
 }
 
-/* Мелкая подсказка снизу телефона */
 .copy-hint {
     font-size: 12px;
     color: #777777;
     margin-top: 5px;
-}
-
-/* Эффект при наведении */
-.copy-banner:hover {
-    background-color: #eaeaea; /* Плашка становится чуть темнее */
-    border-color: #999999;     /* Рамка становится четче */
 }
