@@ -67,6 +67,9 @@ async function loadFlowers() {
                         </div>
                     </div>
                 `;
+            }
+        });
+                
     } catch (error) {
         console.error('Ошибка сборки карточек:', error);
     }
