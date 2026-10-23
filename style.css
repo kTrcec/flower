@@ -119,34 +119,6 @@ body {
     opacity: 1;
 }
 
-.slider-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    font-size: 24px;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 10;
-    user-select: none;
-    transition: background 0.2s ease, opacity 0.2s ease;
-}
-
-.slider-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.prev-btn {
-    left: 8px;
-}
-
-.next-btn {
-    right: 8px;
-}
-
 .order-page-btn {
     position: fixed;         /* Намертво привязываем кнопку к экрану, а не к странице */
     bottom: 25px;            /* Отступ от нижнего края экрана */
