@@ -30,19 +30,35 @@ async function loadFlowers() {
                 
                 const showArrows = images.length > 1;
 
+                let dotsHTML = '';
+                if (images.length > 1) {
+                    dotsHTML = `<div class="slider-dots">`;
+                    images.forEach((_, index) => {
+                        const dotNumber = index + 1; // Человеческий отсчет с 1
+                        dotsHTML += `<span class="dot ${dotNumber === 1 ? 'active' : ''}" data-dot="${dotNumber}"></span>`;
+                    });
+                    dotsHTML += `</div>`;
+                }
+
                 const cardHTML = `
                     <div class="flower-card">
-                        <div class="image-wrapper" style="position: relative;">
-                            ${showArrows ? `<button class="slider-btn prev-btn" onclick="changeImage(this, -1, event)">&#10094;</button>` : ''}
+                        <!-- Добавляем события мыши для реализации свайпа на десктопе -->
+                        <div class="image-wrapper" 
+                             style="position: relative;" 
+                             onmousedown="startSwipe(event, this)"
+                             onmousemove="moveSwipe(event)"
+                             onmouseup="endSwipe(event)"
+                             onmouseleave="endSwipe(event)">
                             
                             <img src="flower/${firstImage}" 
                                  data-images="${images.join(',')}" 
-                                 data-index="0" 
+                                 data-index="1" 
                                  alt="${title}" 
                                  onclick="openImage(this.src)" 
-                                 style="cursor: zoom-in;">
+                                 style="cursor: zoom-in;"
+                                 draggable="false"> <!-- Запрещаем стандартное перетаскивание браузера -->
                                  
-                            ${showArrows ? `<button class="slider-btn next-btn" onclick="changeImage(this, 1, event)">&#10095;</button>` : ''}
+                            ${dotsHTML}
                         </div>
                         <div class="flower-info">
                             <h3 class="flower-title">${title}</h3>
@@ -51,41 +67,96 @@ async function loadFlowers() {
                         </div>
                     </div>
                 `;
-                catalog.innerHTML += cardHTML;
-            }
-        });
-
     } catch (error) {
         console.error('Ошибка сборки карточек:', error);
     }
 }
 
-window.changeImage = function(button, direction, event) {
-    if (event) event.stopPropagation(); 
+let isDragging = false;
+let startX = 0;
+let currentWrapper = null;
+
+// 1. Нажатие кнопки мыши
+window.startSwipe = function(event, wrapper) {
+    // Если кликнули левой кнопкой мыши
+    if (event.button === 0) { 
+        isDragging = true;
+        startX = event.clientX;
+        currentWrapper = wrapper;
+    }
+};
+
+// 2. Движение мыши (срабатывает, только если кнопка зажата)
+window.moveSwipe = function(event) {
+    if (!isDragging || !currentWrapper) return;
+};
+
+// 3. Отпускание мыши или уход курсора из зоны картинки
+window.endSwipe = function(event) {
+    if (!isDragging || !currentWrapper) return;
     
-    const wrapper = button.parentElement;
+    isDragging = false;
+    const endX = event.clientX;
+    const diffX = endX - startX;
+    
+    // Порог чувствительности свайпа в пикселях
+    const swipeThreshold = 50; 
+    
+    // Если сдвинули достаточно далеко
+    if (Math.abs(diffX) > swipeThreshold) {
+        if (diffX < 0) {
+            // Свайп влево -> Следующая картинка (+1)
+            updateSliderImage(currentWrapper, 1);
+        } else {
+            // Свайп вправо -> Предыдущая картинка (-1)
+            updateSliderImage(currentWrapper, -1);
+        }
+    }
+    
+    currentWrapper = null;
+};
+
+// Функция обновления картинки и точек-кружочков
+function updateSliderImage(wrapper, direction) {
     const img = wrapper.querySelector('img');
-    
     const images = img.getAttribute('data-images')
                       .split(',')
                       .map(name => name.trim())
                       .filter(name => name.length > 0);
-                      
-    let currentIndex = parseInt(img.getAttribute('data-index') || 0, 10);
     
+    if (images.length <= 1) return; // Если картинка одна, ничего не делаем
+
+    // Считываем текущий индекс (работаем в отсчете с 1, как тебе удобно)
+    let currentIndex = parseInt(img.getAttribute('data-index') || 1, 10);
+    
+    // Меняем индекс в зависимости от направления свайпа
     currentIndex += direction;
-    if (currentIndex >= images.length) currentIndex = 0;
-    if (currentIndex < 0) currentIndex = images.length - 1;
     
-    const nextImage = images[currentIndex];
+    // Зацикливаем слайдер (границы от 1 до images.length)
+    if (currentIndex > images.length) currentIndex = 1;
+    if (currentIndex < 1) currentIndex = images.length;
+    
+    // Сохраняем обновленный индекс назад в атрибут
     img.setAttribute('data-index', currentIndex);
     
+    // Меняем путь к картинке (подставляем массив с индексацией от 0, поэтому вычитаем 1)
+    const nextImage = images[currentIndex - 1];
     const currentSrc = img.src;
     const lastSlashIndex = currentSrc.lastIndexOf('/');
     const basePath = currentSrc.substring(0, lastSlashIndex + 1);
-    
     img.src = basePath + nextImage;
-};
+    
+    // Обновляем визуальный статус точек-кружочков
+    const dots = wrapper.querySelectorAll('.slider-dots .dot');
+    dots.forEach(dot => {
+        const dotIndex = parseInt(dot.getAttribute('data-dot'), 10);
+        if (dotIndex === currentIndex) {
+            dot.classList.add('active'); // Закрашенный полный кружок
+        } else {
+            dot.classList.remove('active'); // Выколотый кружок
+        }
+    });
+}
 
 
 loadFlowers();
