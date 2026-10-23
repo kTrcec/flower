@@ -48,7 +48,10 @@ async function loadFlowers() {
                              onmousedown="startSwipe(event, this)"
                              onmousemove="moveSwipe(event)"
                              onmouseup="endSwipe(event)"
-                             onmouseleave="endSwipe(event)">
+                             onmouseleave="endSwipe(event)"
+                             ontouchstart="startSwipe(event, this)"
+                             ontouchmove="moveSwipe(event)"
+                             ontouchend="endSwipe(event)">
                             
                             <img src="flower/${firstImage}" 
                                  data-images="${images.join(',')}" 
@@ -81,40 +84,38 @@ let isDragging = false;
 let startX = 0;
 let currentWrapper = null;
 
-// 1. Нажатие кнопки мыши
 window.startSwipe = function(event, wrapper) {
-    // Если кликнули левой кнопкой мыши
-    if (event.button === 0) { 
+    // Проверяем: либо это левая кнопка мыши (button === 0), либо это тач-событие на телефоне
+    if (event.button === 0 || event.touches) { 
         isDragging = true;
-        startX = event.clientX;
+        // Берём координату X: если это телефон, берем первый палец [0], иначе координату мыши
+        startX = event.touches ? event.touches[0].clientX : event.clientX;
         currentWrapper = wrapper;
     }
 };
 
-// 2. Движение мыши (срабатывает, только если кнопка зажата)
 window.moveSwipe = function(event) {
     if (!isDragging || !currentWrapper) return;
 };
 
-// 3. Отпускание мыши или уход курсора из зоны картинки
+// Универсальное отпускание (мышь или палец)
 window.endSwipe = function(event) {
     if (!isDragging || !currentWrapper) return;
     
     isDragging = false;
-    const endX = event.clientX;
+    
+    // На телефонах в момент отпускания пальца в event.touches уже ничего нет, 
+    // поэтому берем из changedTouches (где зафиксировано последнее изменение)
+    const endX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
     const diffX = endX - startX;
     
-    // Порог чувствительности свайпа в пикселях
     const swipeThreshold = 50; 
     
-    // Если сдвинули достаточно далеко
     if (Math.abs(diffX) > swipeThreshold) {
         if (diffX < 0) {
-            // Свайп влево -> Следующая картинка (+1)
-            updateSliderImage(currentWrapper, 1);
+            updateSliderImage(currentWrapper, 1); // Свайп влево
         } else {
-            // Свайп вправо -> Предыдущая картинка (-1)
-            updateSliderImage(currentWrapper, -1);
+            updateSliderImage(currentWrapper, -1); // Свайп вправо
         }
     }
     
