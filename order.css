@@ -91,7 +91,7 @@ body {
 }
 
 .copy-badge {
-    font-size: 12px;
+    font-size: 10px;
     color: #777777;
     background-color: transparent;
     border: none;
@@ -161,7 +161,7 @@ body {
 }
 
 .copy-hint {
-    font-size: 12px;
+    font-size: 10px;
     color: #777777;
     margin-top: 5px;
 }
