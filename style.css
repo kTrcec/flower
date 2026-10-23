@@ -172,3 +172,31 @@ body {
     background-color: #000000; /* Становится глубоким черным */
     transform: translateY(-3px); /* Слегка приподнимается вверх при наведении */
 }
+
+.slider-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.25); /* Легкая темная подложка, чтобы точки были видны на белых фото */
+    padding: 4px 8px;
+    border-radius: 10px;
+    pointer-events: none; /* Чтобы точки не мешали зажатию мышки */
+}
+
+.slider-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid #ffffff;
+    background-color: transparent;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.slider-dots .dot.active {
+    background-color: #ffffff;
+    transform: scale(1.1); /* Слегка увеличиваем активную точку для акцента */
+}
