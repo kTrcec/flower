@@ -67,6 +67,8 @@ async function loadFlowers() {
                         </div>
                     </div>
                 `;
+
+                catalog.innerHTML += cardHTML;
             }
         });
                 
